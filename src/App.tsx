@@ -1,24 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useState } from "react";
+import QREditor from './QR-Editor';
+import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
+
+
 
 function App() {
+
+  const classes = useStyles();
+
+  const DEFAULT_IMAGE_SRC = ""
+  const DEFAULT_USE_IMAGE = false
+  const DEFAULT_CONTENT = ""
+  const DEFAULT_COLOR = ""
+
+  const [imageSrc, setImageSrc] = useState("")
+  const [useImage, setUseImage] = useState(false)
+  const [content, setContent] = useState("google.ch")
+  const [subTitle, setSubtitle] = useState("")
+  const [color, setColor] = useState("#00FF00")
+
+
+  function reset() {
+    setImageSrc(DEFAULT_IMAGE_SRC)
+    setUseImage(DEFAULT_USE_IMAGE)
+    setContent(DEFAULT_CONTENT)
+    setColor(DEFAULT_COLOR)
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <QREditor content={content} color={color} imageSrc={imageSrc} subTitle={subTitle} />
+      <Button color="primary">Hello World</Button>
+      <form className={classes.root} noValidate autoComplete="off">
+        <TextField id="standard-basic" label="QR Content" />
+      </form>
     </div>
   );
 }

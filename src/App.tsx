@@ -43,9 +43,19 @@ function App() {
   return (
     <div className="App">
       <QREditor content={content} color={color} imageSrc={imageSrc} subTitle={subTitle} />
-      <Button color="primary">Hello World</Button>
       <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="standard-basic" label="QR Content" />
+        <TextField id="standard-basic"
+          label="QR Content"
+          onChange={(event) => { setContent(event.target.value) }}
+          value={content}
+        />
+      </form>
+      <form className={classes.root} noValidate autoComplete="off">
+        <TextField id="standard-basic"
+          label="Subtitle"
+          onChange={(event) => { setSubtitle(event.target.value) }}
+          value={subTitle}
+        />
       </form>
     </div>
   );

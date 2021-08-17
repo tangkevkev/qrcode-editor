@@ -3,7 +3,9 @@ import { useState } from "react";
 import QREditor from './QR-Editor';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { TwitterPicker, BlockPicker } from 'react-color'
 import TextField from '@material-ui/core/TextField';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +43,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="flex-container">
       <QREditor content={content} color={color} imageSrc={imageSrc} subTitle={subTitle} />
       <form className={classes.root} noValidate autoComplete="off">
         <TextField id="standard-basic"
@@ -57,6 +59,7 @@ function App() {
           value={subTitle}
         />
       </form>
+      <BlockPicker color = {color} onChange={(event) => setColor(event.hex)}/>
     </div>
   );
 }

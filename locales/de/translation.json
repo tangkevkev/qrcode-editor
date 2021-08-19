@@ -5,5 +5,7 @@
     "play": "Spielen",
     "create private game": "Privates Spiel erstellen",
     "game identification": "Spiel ID",
-    "join game": "Spiel beitreten"
+    "join game": "Spiel beitreten",
+    "qr content": "QR-Code Inhalt",
+    "subtitle": "Untertitel"
 }

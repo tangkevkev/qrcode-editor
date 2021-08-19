@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import { useTranslation } from 'react-i18next';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
 
   const classes = useStyles();
+  const { t, } = useTranslation();
 
   const DEFAULT_IMAGE_SRC = ""
   const DEFAULT_USE_IMAGE = false
@@ -71,7 +73,7 @@ function App() {
             <Grid item>
               <form className={classes.root} noValidate autoComplete="off">
                 <TextField id="standard-basic"
-                  label="QR Content"
+                  label= {t("qr content")}
                   onChange={(event) => { setContent(event.target.value) }}
                   value={content}
                 />
@@ -80,7 +82,7 @@ function App() {
             <Grid item>
               <form className={classes.root} noValidate autoComplete="off">
                 <TextField id="standard-basic"
-                  label="Subtitle"
+                  label= {t("subtitle")}
                   onChange={(event) => { setSubtitle(event.target.value) }}
                   value={subTitle}
                 />

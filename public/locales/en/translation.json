@@ -5,6 +5,8 @@
     "play": "Play",
     "create private game": "Create Private Game",
     "game identification": "Game Identifier",
-    "join game": "Join Game"
+    "join game": "Join Game",
+    "qr content": "QR Content",
+    "subtitle": "Subtitle"
 
 }

@@ -1,26 +1,30 @@
 
-import { QRCodeImg } from '@cheprasov/react-qrcode';
+import { Grid } from '@material-ui/core';
 import QRCode from 'qrcode.react'
 
 
-interface QRProps{
-    content: string,
-    color?: string,
-    imageSrc?: string,
-    subTitle?: string,
+interface QRProps {
+  content: string,
+  color?: string,
+  imageSrc?: string,
+  subTitle?: string,
 }
 
 function QREditor(props: QRProps) {
   return (
-    <div className="App">
+    <Grid container spacing={0}
+      direction="column"
+      justifyContent="center"
+      alignItems="center">
       <QRCode
         size={256}
         fgColor={props.color}
-        value= {props.content}
-        level= {'H'}
-        includeMargin={true}
-      />
-    </div>
+        value={props.content}
+        level={'H'}
+      >
+      </QRCode>
+      {props.subTitle}
+    </Grid>
   );
 }
 

@@ -1,110 +1,38 @@
-import './App.css';
-import { useState } from "react";
-import QREditor from './QR-Editor';
-import { Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { TwitterPicker, BlockPicker } from 'react-color'
-import TextField from '@material-ui/core/TextField';
+import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import { useTranslation } from 'react-i18next';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import SingleEditor from './UI/SingleEditor';
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  },
-  box: {
-    borderStyle: 'solid',
-  },
-  rootGrid: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-}));
+const SINGLE_EDITOR_INDEX = 0
+const MULTIPLE_EDITOR_INDEX = 1
 
+export default function App() {
+  const [value, setValue] = React.useState(0);
 
-
-function App() {
-
-  const classes = useStyles();
-  const { t, } = useTranslation();
-
-  const DEFAULT_IMAGE_SRC = ""
-  const DEFAULT_USE_IMAGE = false
-  const DEFAULT_CONTENT = ""
-  const DEFAULT_COLOR = ""
-
-  const [imageSrc, setImageSrc] = useState("")
-  const [useImage, setUseImage] = useState(false)
-  const [content, setContent] = useState("google.ch")
-  const [subTitle, setSubtitle] = useState("")
-  const [color, setColor] = useState("#00FF00")
-
-
-  function reset() {
-    setImageSrc(DEFAULT_IMAGE_SRC)
-    setUseImage(DEFAULT_USE_IMAGE)
-    setContent(DEFAULT_CONTENT)
-    setColor(DEFAULT_COLOR)
-  }
-
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    console.log("New value: " + newValue)
+    setValue(newValue);
+  };
 
   return (
-    <div className={`${classes.rootGrid}`}>
-      <Grid container spacing={2}
-        direction="row">
-        <Grid item xs={12} lg={4} md={3} />
-        <Grid item xs={12} lg={2} md={3}
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="center">
-          <Paper elevation={3}>
-
-            <Grid item>
-              <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="standard-basic"
-                  label= {t("qr content")}
-                  onChange={(event) => { setContent(event.target.value) }}
-                  value={content}
-                />
-              </form>
-            </Grid>
-            <Grid item>
-              <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="standard-basic"
-                  label= {t("subtitle")}
-                  onChange={(event) => { setSubtitle(event.target.value) }}
-                  value={subTitle}
-                />
-              </form>
-            </Grid>
-            <Grid item
-            container
-              justifyContent="center"
-              alignItems="center">
-              <BlockPicker color={color} onChange={(event) => setColor(event.hex)} triangle={'hide'} />
-            </Grid>
-          </Paper>
-
-        </Grid>
-
-        <Grid item xs={12} lg={2} md={3}>
-            <QREditor content={content} color={color} imageSrc={imageSrc} subTitle={subTitle} />
-        </Grid>
-      </Grid>
-
-    </div>
+    <React.Fragment>
+      <Paper square>
+        <Tabs
+          value={value}
+          indicatorColor="primary"
+          textColor="primary"
+          centered={true}
+          onChange={handleChange}
+          aria-label="disabled tabs example"
+        >
+          <Tab label="Single Editor" value={SINGLE_EDITOR_INDEX} />
+          <Tab label="Active" value={MULTIPLE_EDITOR_INDEX} />
+        </Tabs>
+      </Paper>
+      <br/>
+      {value == SINGLE_EDITOR_INDEX && <SingleEditor />}
+    </React.Fragment>
   );
 }
-
-export default App;

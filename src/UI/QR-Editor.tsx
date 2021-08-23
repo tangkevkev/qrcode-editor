@@ -6,6 +6,8 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import IconButton from '@material-ui/core/IconButton';
 import { Button } from '@material-ui/core';
 
+import React, { useEffect, useRef, useState } from "react";
+import QRCodeStyling, {Options} from "qr-code-styling";
 
 
 interface QRProps {
@@ -26,13 +28,41 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+
+
 function QREditor(props: QRProps) {
 
   const classes = useStyles();
+  const ref = useRef(null);
 
+  const qrCode = new QRCodeStyling({
+    width: 250,
+    height: 250,
+    data: props.content,
+    image: 
+      "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
+    dotsOptions: {
+      color: "#000000",
+      type: "rounded"
+    },
+    imageOptions: {
+      crossOrigin: "anonymous",
+      margin: 20
+    }
+  });
+
+  useEffect(() => {
+    qrCode.append(ref.current as any);
+  }, []);
+
+  useEffect(() => {
+    qrCode.update({
+      data: props.content
+    });
+  }, [props.content]);
 
   return (
-    <div className="HpQrcode"> 
+    <div className="HpQrcode">
 
       <Grid container spacing={0}
         direction="column"
@@ -57,6 +87,8 @@ function QREditor(props: QRProps) {
         </Button>
 
       </Grid>
+      <div ref={ref} />
+
     </div>
   );
 }

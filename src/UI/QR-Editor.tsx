@@ -1,13 +1,6 @@
-
-import { Grid } from '@material-ui/core';
-import QRCode from 'qrcode.react'
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import IconButton from '@material-ui/core/IconButton';
-import { Button } from '@material-ui/core';
-
 import React, { useEffect, useRef, useState } from "react";
-import QRCodeStyling, {Options} from "qr-code-styling";
+import QRCodeStyling from "qr-code-styling";
+
 
 
 interface QRProps {
@@ -17,39 +10,24 @@ interface QRProps {
   subTitle?: string,
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    margin: {
-      margin: theme.spacing(1),
-    },
-    extendedIcon: {
-      marginRight: theme.spacing(1),
-    },
-  }),
-);
+const qrCode = new QRCodeStyling({
+  width: 250,
+  height: 250,
+  image:
+    "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
+  dotsOptions: {
+    color: "#4267b2",
+    type: "square"
+  },
+  imageOptions: {
+    crossOrigin: "anonymous",
+    margin: 5
+  }
+});
 
-
-
-function QREditor(props: QRProps) {
-
-  const classes = useStyles();
+export default function QREditor(props: QRProps) {
+  const [fileExt, setFileExt] = useState("png");
   const ref = useRef(null);
-
-  const qrCode = new QRCodeStyling({
-    width: 250,
-    height: 250,
-    data: props.content,
-    image: 
-      "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
-    dotsOptions: {
-      color: "#000000",
-      type: "rounded"
-    },
-    imageOptions: {
-      crossOrigin: "anonymous",
-      margin: 20
-    }
-  });
 
   useEffect(() => {
     qrCode.append(ref.current as any);
@@ -57,40 +35,53 @@ function QREditor(props: QRProps) {
 
   useEffect(() => {
     qrCode.update({
-      data: props.content
+      data: (props.content.length == 0) ? "empty" : props.content
     });
   }, [props.content]);
 
+  useEffect(() => {
+    qrCode.update({
+      dotsOptions: {
+        color: props.color
+      }
+    });
+  }, [props.color]);
+
+
+  const onExtensionChange = (event: any) => {
+    setFileExt(event.target.value);
+  };
+
+  const onDownloadClick = () => {
+    qrCode.download({
+      extension: fileExt as any
+    });
+  };
+
   return (
-    <div className="HpQrcode">
-
-      <Grid container spacing={0}
-        direction="column"
-        justifyContent="center"
-        alignItems="center">
-        <QRCode
-          size={256}
-          fgColor={props.color}
-          value={props.content}
-          level={'H'}
-          includeMargin={true}
-          imageSettings={{
-            src: "https://static.zpao.com/favicon.png"
-          }}
-        />
-        {props.subTitle}
-        <Button variant="text" color="primary" component="span">
-          Download
-          <IconButton aria-label="delete" className={classes.margin} size="small">
-            <ArrowDownwardIcon fontSize="inherit" />
-          </IconButton>
-        </Button>
-
-      </Grid>
+    <div className="App">
+      <div style={styles.inputWrapper}>
+        <select onChange={onExtensionChange} value={fileExt}>
+          <option value="png">PNG</option>
+          <option value="jpeg">JPEG</option>
+          <option value="webp">WEBP</option>
+        </select>
+        <button onClick={onDownloadClick}>Download</button>
+      </div>
       <div ref={ref} />
-
     </div>
   );
 }
 
-export default QREditor;
+const styles = {
+  inputWrapper: {
+    margin: "20px 0",
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%"
+  },
+  inputBox: {
+    flexGrow: 1,
+    marginRight: 20
+  }
+};

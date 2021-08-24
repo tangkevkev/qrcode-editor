@@ -36,6 +36,12 @@
     color: #61dafb;
 }
 
+.Paper-header {
+    background-color: beige;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import QRCodeStyling from "qr-code-styling";
+import QRCodeStyling, { cornerDotTypes, cornerSquareTypes } from "qr-code-styling";
 
 
 
 interface QRProps {
   content: string,
   color?: string,
+  colorCorner?: string,
   imageSrc?: string,
   subTitle?: string,
 }
@@ -22,7 +23,12 @@ const qrCode = new QRCodeStyling({
   imageOptions: {
     crossOrigin: "anonymous",
     margin: 5
+  },
+  cornersSquareOptions: {
+    color: "#FFD800",
+    type: "square"
   }
+
 });
 
 export default function QREditor(props: QRProps) {
@@ -47,6 +53,14 @@ export default function QREditor(props: QRProps) {
     });
   }, [props.color]);
 
+  useEffect(() => {
+    qrCode.update({
+      cornersSquareOptions: {
+        color: props.colorCorner
+      }
+    });
+  }, [props.colorCorner]);
+
 
   const onExtensionChange = (event: any) => {
     setFileExt(event.target.value);
@@ -60,6 +74,9 @@ export default function QREditor(props: QRProps) {
 
   return (
     <div className="App">
+
+      <div ref={ref} />
+
       <div style={styles.inputWrapper}>
         <select onChange={onExtensionChange} value={fileExt}>
           <option value="png">PNG</option>
@@ -68,7 +85,6 @@ export default function QREditor(props: QRProps) {
         </select>
         <button onClick={onDownloadClick}>Download</button>
       </div>
-      <div ref={ref} />
     </div>
   );
 }

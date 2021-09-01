@@ -37,9 +37,9 @@
 }
 
 .Paper-header {
-    background-color: beige;
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: monospace;
+    font-size: 20px;
 }
 
 @keyframes App-logo-spin {

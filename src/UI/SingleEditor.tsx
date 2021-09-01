@@ -76,16 +76,13 @@ function SingleEditor() {
       <Grid container spacing={2}
         direction="row"
         alignContent="center"
+        justifyContent="center"
         justify="center">
-
-
-
         <Grid item>
           <Paper elevation={4}>
             <div className="Paper-header">
               <h3> {t("Content")} </h3>
             </div>
-
             <form className={classes.root} noValidate autoComplete="off">
               <TextField id="standard-basic"
                 multiline={true}
@@ -103,7 +100,16 @@ function SingleEditor() {
               />
             </form>
           </Paper>
-          <Paper elevation={4}>
+
+        </Grid>
+  
+
+        <Grid item>
+          <QREditor content={content} color={color} imageSrc={imageSrc} subTitle={subTitle} colorCorner={colorCorner} />
+        </Grid>
+
+        <Grid item>
+        <Paper elevation={4}>
             <div className="Paper-header">
               <h3>{t("Customize")}</h3>
             </div>
@@ -164,13 +170,6 @@ function SingleEditor() {
             </Accordion>
           </Paper>
         </Grid>
-
-
-
-        <Grid item>
-          <QREditor content={content} color={color} imageSrc={imageSrc} subTitle={subTitle} colorCorner={colorCorner} />
-        </Grid>
-
       </Grid>
 
     </div>

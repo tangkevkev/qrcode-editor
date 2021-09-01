@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/qrcode-editor/static/css/main.91925c4a.chunk.css",
-    "main.js": "/qrcode-editor/static/js/main.9f5b8f83.chunk.js",
-    "main.js.map": "/qrcode-editor/static/js/main.9f5b8f83.chunk.js.map",
+    "main.css": "/qrcode-editor/static/css/main.889a1057.chunk.css",
+    "main.js": "/qrcode-editor/static/js/main.40c37232.chunk.js",
+    "main.js.map": "/qrcode-editor/static/js/main.40c37232.chunk.js.map",
     "runtime-main.js": "/qrcode-editor/static/js/runtime-main.2facb756.js",
     "runtime-main.js.map": "/qrcode-editor/static/js/runtime-main.2facb756.js.map",
     "static/js/2.fa3f9ea3.chunk.js": "/qrcode-editor/static/js/2.fa3f9ea3.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.56a87fea.chunk.js": "/qrcode-editor/static/js/3.56a87fea.chunk.js",
     "static/js/3.56a87fea.chunk.js.map": "/qrcode-editor/static/js/3.56a87fea.chunk.js.map",
     "index.html": "/qrcode-editor/index.html",
-    "static/css/main.91925c4a.chunk.css.map": "/qrcode-editor/static/css/main.91925c4a.chunk.css.map",
+    "static/css/main.889a1057.chunk.css.map": "/qrcode-editor/static/css/main.889a1057.chunk.css.map",
     "static/js/2.fa3f9ea3.chunk.js.LICENSE.txt": "/qrcode-editor/static/js/2.fa3f9ea3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.2facb756.js",
     "static/js/2.fa3f9ea3.chunk.js",
-    "static/css/main.91925c4a.chunk.css",
-    "static/js/main.9f5b8f83.chunk.js"
+    "static/css/main.889a1057.chunk.css",
+    "static/js/main.40c37232.chunk.js"
   ]
 }

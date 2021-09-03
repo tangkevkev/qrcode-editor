@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling, { cornerDotTypes, cornerSquareTypes } from "qr-code-styling";
+import Select from '@material-ui/core/Select';
 
 
 
@@ -12,8 +13,8 @@ interface QRProps {
 }
 
 const qrCode = new QRCodeStyling({
-  width: 250,
-  height: 250,
+  width: 200,
+  height: 200,
   image:
     "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
   dotsOptions: {
@@ -91,9 +92,10 @@ export default function QREditor(props: QRProps) {
 
 const styles = {
   inputWrapper: {
-    margin: "20px 0",
-    display: "flex",
-    justifyContent: "space-between",
+    margin: "5px 0",
+    display: "block",
+
+    justifyContent: "center",
     width: "100%"
   },
   inputBox: {

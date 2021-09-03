@@ -75,9 +75,13 @@ function SingleEditor() {
     <div className={`${classes.rootGrid}`}>
       <Grid container spacing={2}
         direction="row"
-        alignContent="center"
+        alignItems="center"
         justifyContent="center"
-        justify="center">
+      >
+
+        <Grid item xs={12}>
+          <QREditor content={content} color={color} imageSrc={imageSrc} subTitle={subTitle} colorCorner={colorCorner} />
+        </Grid>
         <Grid item>
           <Paper elevation={4}>
             <div className="Paper-header">
@@ -102,14 +106,12 @@ function SingleEditor() {
           </Paper>
 
         </Grid>
-  
+
+
+
 
         <Grid item>
-          <QREditor content={content} color={color} imageSrc={imageSrc} subTitle={subTitle} colorCorner={colorCorner} />
-        </Grid>
-
-        <Grid item>
-        <Paper elevation={4}>
+          <Paper elevation={4}>
             <div className="Paper-header">
               <h3>{t("Customize")}</h3>
             </div>

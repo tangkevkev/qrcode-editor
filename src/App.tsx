@@ -3,6 +3,8 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import SingleEditor from './UI/SingleEditor';
+import Profile from './UI/Profiles';
+
 
 
 const SINGLE_EDITOR_INDEX = 0
@@ -17,8 +19,14 @@ export default function App() {
   };
 
   return (
-    <React.Fragment>
-      <Paper square>
+    <div className="No-Scroll ">
+      <SingleEditor />
+
+    </div>
+  );
+}
+/**
+ *     <Paper square>
         <Tabs
           value={value}
           indicatorColor="primary"
@@ -31,8 +39,4 @@ export default function App() {
           <Tab label="Active" value={MULTIPLE_EDITOR_INDEX} />
         </Tabs>
       </Paper>
-      <br/>
-      {value == SINGLE_EDITOR_INDEX && <SingleEditor />}
-    </React.Fragment>
-  );
-}
+ */

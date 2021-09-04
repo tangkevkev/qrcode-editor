@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling, { cornerDotTypes, cornerSquareTypes } from "qr-code-styling";
-import './../App.css';
-
 import Select from '@material-ui/core/Select';
 import qrcode from "qrcode.react";
 
@@ -38,7 +36,7 @@ const qrCode = new QRCodeStyling({
 
 });
 
-export default function QREditor(props: QRProps) {
+export default function OldQREditor(props: QRProps) {
   const [fileExt, setFileExt] = useState("png");
   const [canvasInit, setCanvasInit] = useState(false)
   const [canvas, setCanvas] = useState<HTMLCanvasElement>(null as any)
@@ -87,35 +85,15 @@ export default function QREditor(props: QRProps) {
     });
   };
 
-  const canvasHandler = (event: React.MouseEvent<HTMLDivElement>, canvas: HTMLCanvasElement) => {
-    setCanvas(canvas)
-    canvas.removeEventListener('mousemove', mouseMove)
-    canvas.removeEventListener('mouseout', mouseOut)
-    canvas.addEventListener('mouseout', mouseOut, false)
-    canvas.addEventListener('mousemove', mouseMove, false)
-    setCanvasInit(true)
-  }
+ 
 
 
 
-  const mouseOut = (event: MouseEvent) => {
-    if (canvas)
-      canvas.style.cursor = 'default'
-  }
-
-  const mouseMove = (event: MouseEvent) => {
-    console.log("Touched me " + event.offsetX)
-    if (canvas)
-      canvas.style.cursor = 'pointer'
-  }
 
   return (
-    < >
-      <div ref={ref} onMouseMove={(event: React.MouseEvent<HTMLDivElement>) => {
-        if (event.target instanceof HTMLCanvasElement) {
-          canvasHandler(event, event.target)
-        }
-      }} />
+    <div className="App">
+
+      <div ref={ref} />
       <div style={styles.inputWrapper}>
         <select onChange={onExtensionChange} value={fileExt}>
           <option value="png">PNG</option>
@@ -124,7 +102,7 @@ export default function QREditor(props: QRProps) {
         </select>
         <button onClick={onDownloadClick}>Download</button>
       </div>
-    </>
+    </div>
   );
 }
 

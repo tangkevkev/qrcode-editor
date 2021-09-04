@@ -21,7 +21,6 @@ export default function App() {
   return (
     <div className="No-Scroll ">
       <SingleEditor />
-
     </div>
   );
 }

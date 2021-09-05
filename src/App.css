@@ -3,15 +3,30 @@
     overflow: hidden;
 }
 
-.QR-Code {}
+.QR-Code {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-.QR-Code:hover {
+.QR-Code>Canvas {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.QR-Code>Canvas:hover {
     cursor: pointer;
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 .App {
     text-align: center;
+}
+
+.App>Canvas:hover {
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 .App-logo {
@@ -29,7 +44,6 @@
     display: block;
     justify-content: center;
     align-items: center;
-    border: 3px solid green;
 }
 
 .flex-container {

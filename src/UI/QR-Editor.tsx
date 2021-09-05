@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling, { cornerDotTypes, cornerSquareTypes } from "qr-code-styling";
-import './../App.css';
-
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import qrcode from "qrcode.react";
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Button from "@material-ui/core/Button";
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 
 
@@ -14,6 +19,21 @@ interface QRProps {
   imageSrc?: string,
   subTitle?: string,
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+    button: {
+      margin: theme.spacing(1),
+    },
+  }),
+);
 
 const qrCode = new QRCodeStyling({
   width: 250,
@@ -38,11 +58,13 @@ const qrCode = new QRCodeStyling({
 
 });
 
-export default function QREditor(props: QRProps) {
+export default function OldQREditor(props: QRProps) {
   const [fileExt, setFileExt] = useState("png");
   const [canvasInit, setCanvasInit] = useState(false)
   const [canvas, setCanvas] = useState<HTMLCanvasElement>(null as any)
   const ref = useRef(null);
+  const classes = useStyles();
+
 
 
 
@@ -87,44 +109,44 @@ export default function QREditor(props: QRProps) {
     });
   };
 
-  const canvasHandler = (event: React.MouseEvent<HTMLDivElement>, canvas: HTMLCanvasElement) => {
-    setCanvas(canvas)
-    canvas.removeEventListener('mousemove', mouseMove)
-    canvas.removeEventListener('mouseout', mouseOut)
-    canvas.addEventListener('mouseout', mouseOut, false)
-    canvas.addEventListener('mousemove', mouseMove, false)
-    setCanvasInit(true)
-  }
 
 
 
-  const mouseOut = (event: MouseEvent) => {
-    if (canvas)
-      canvas.style.cursor = 'default'
-  }
 
-  const mouseMove = (event: MouseEvent) => {
-    console.log("Touched me " + event.offsetX)
-    if (canvas)
-      canvas.style.cursor = 'pointer'
-  }
 
   return (
-    < >
-      <div ref={ref} onMouseMove={(event: React.MouseEvent<HTMLDivElement>) => {
-        if (event.target instanceof HTMLCanvasElement) {
-          canvasHandler(event, event.target)
-        }
-      }} />
+    <div className="QR-Code">
+
+      <div ref={ref} className="App" />
       <div style={styles.inputWrapper}>
-        <select onChange={onExtensionChange} value={fileExt}>
-          <option value="png">PNG</option>
-          <option value="jpeg">JPEG</option>
-          <option value="webp">WEBP</option>
-        </select>
-        <button onClick={onDownloadClick}>Download</button>
+      <Button
+          variant="contained"
+          color="default"
+          onClick={onDownloadClick}
+          className={classes.button}
+          startIcon={<ArrowDownwardIcon />}
+        >
+          Download
+        </Button>
+        <FormControl className={classes.formControl}>
+          
+          <InputLabel id="demo-simple-select-filled-label">Extension</InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={fileExt}
+            onChange={onExtensionChange}
+          >
+            <MenuItem value={"png"}>PNG</MenuItem>
+            <MenuItem value={"jpeg"}>JPEG</MenuItem>
+            <MenuItem value={"webp"}>WEBP</MenuItem>
+          </Select>
+
+        </FormControl>
+       
+
       </div>
-    </>
+    </div>
   );
 }
 

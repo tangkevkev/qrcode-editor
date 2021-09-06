@@ -8,24 +8,20 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { useTranslation } from 'react-i18next';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import InputBase from '@material-ui/core/InputBase';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import ForwardIcon from '@material-ui/icons/Forward';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  },
   box: {
     borderStyle: 'solid',
   },
   rootGrid: {
     flexGrow: 1,
+    margin: 50,
   },
   paper: {
     padding: theme.spacing(2),
@@ -37,9 +33,22 @@ const useStyles = makeStyles((theme) => ({
     flexBasis: '33.33%',
     flexShrink: 0,
   },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: 'gray',
+
+  root: {
+    padding: '2px 4px',
+    display: 'flex',
+    width: 400,
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    padding: 10,
+  },
+  divider: {
+    height: 28,
+    margin: 4,
   },
 }));
 
@@ -79,22 +88,39 @@ export default function OldSingleEditor() {
         alignItems="center"
         justifyContent="center"
       >
+        <Paper component="form" className={classes.root}>
+          <IconButton className={classes.iconButton} aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <InputBase
+            className={classes.input}
+            placeholder="QR content"
+            value={content}
+            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {setContent(event.target.value)}}
+            inputProps={{ 'aria-label': 'QR Code' }}
+          />
+          <IconButton className={classes.iconButton} aria-label="search">
+            <ForwardIcon />
+          </IconButton>
+
+        </Paper>
+
 
         <Grid item xs={12}>
           <QREditor content={content}
             color={color}
-            imageSrc={imageSrc} 
-            subTitle={subTitle} 
+            imageSrc={imageSrc}
+            subTitle={subTitle}
             colorCorner={colorCorner}
-            
-            />
+
+          />
         </Grid>
 
 
-      
 
 
-        
+
+
       </Grid>
 
     </div >

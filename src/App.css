@@ -11,6 +11,7 @@
 
 .background {
     background-color: #fafafa;
+    border-radius: 10px;
 }
 
 .QR-Code {

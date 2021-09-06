@@ -157,11 +157,6 @@ export default function OldQREditor(props: QRProps) {
   };
 
 
-
-
-
-
-
   return (
     <div className="QR-Code">
 
@@ -200,20 +195,20 @@ export default function OldQREditor(props: QRProps) {
         </Button>
 
       </div>
-
-      <Fade in={!showTools} timeout={1000}>
-        <Button
-          color="primary"
-          onClick={() => { setShowTools(!showTools) }}
-          className={classes.button}
-          startIcon={<EditIcon />}
-        >
-          {t("Edit")}
-        </Button>
-      </Fade>
-
-      <Fade in={showTools} timeout={1000}>
-        <div className="background">
+      {!showTools &&
+        <Fade in={!showTools} timeout={1000}>
+          <Button
+            color="primary"
+            onClick={() => { setShowTools(!showTools) }}
+            className={classes.button}
+            startIcon={<EditIcon />}
+          >
+            {t("Edit")}
+          </Button>
+        </Fade>
+      }
+      {showTools &&
+        <Fade in={showTools} timeout={1000}>
           <Button
             color="primary"
             onClick={() => { setShowTools(!showTools) }}
@@ -223,13 +218,16 @@ export default function OldQREditor(props: QRProps) {
           >
             {t("Close")}
           </Button>
-
-          <Grid container spacing={5}
+        </Fade>
+      }
+      <Fade in={showTools} timeout={1000}>
+        <div className="background">
+          <Grid container spacing={3}
             direction="row"
             alignItems="center"
             justifyContent="center"
           >
-            <Grid item>
+            <Grid item >
               <div className="flex-container">
                 <Paper elevation={4}>
                   <div className="Paper-header">

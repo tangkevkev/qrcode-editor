@@ -9,6 +9,21 @@ import qrcode from "qrcode.react";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { useTranslation } from 'react-i18next';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { BlockPicker } from 'react-color'
+import Fade from '@material-ui/core/Fade';
+import EditIcon from '@material-ui/icons/Edit';
+import Slide from '@material-ui/core/Slide';
+import Collapse from '@material-ui/core/Collapse';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 
 
@@ -32,6 +47,27 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     button: {
       margin: theme.spacing(1),
+    },
+
+    box: {
+      borderStyle: 'solid',
+    },
+    rootGrid: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      flexBasis: '33.33%',
+      flexShrink: 0,
+    },
+    secondaryHeading: {
+      fontSize: theme.typography.pxToRem(15),
+      color: 'gray',
     },
   }),
 );
@@ -62,9 +98,18 @@ const qrCode = new QRCodeStyling({
 export default function OldQREditor(props: QRProps) {
   const [fileExt, setFileExt] = useState("png");
   const [canvasInit, setCanvasInit] = useState(false)
-  const [canvas, setCanvas] = useState<HTMLCanvasElement>(null as any)
+  const [content, setContent] = useState("google.ch")
+  const [subTitle, setSubtitle] = useState("")
+  const [color, setColor] = useState("#000000")
+  const [colorCorner, setColorCorner] = useState("#000000")
+  const [imageSrc, setImageSrc] = useState("")
+  const [useImage, setUseImage] = useState(false)
+  const [showTools, setShowTools] = useState(false)
+
   const ref = useRef(null);
   const classes = useStyles();
+  const { t, } = useTranslation();
+
 
 
 
@@ -86,18 +131,18 @@ export default function OldQREditor(props: QRProps) {
   useEffect(() => {
     qrCode.update({
       dotsOptions: {
-        color: props.color
+        color: color
       }
     });
-  }, [props.color]);
+  }, [color]);
 
   useEffect(() => {
     qrCode.update({
       cornersSquareOptions: {
-        color: props.colorCorner
+        color: colorCorner
       }
     });
-  }, [props.colorCorner]);
+  }, [colorCorner]);
 
 
   const onExtensionChange = (event: any) => {
@@ -112,16 +157,8 @@ export default function OldQREditor(props: QRProps) {
   };
 
 
-  const canvasMousedown = () => {
-    if (props.onClickQR) {
-      props.onClickQR()
-    }
-  }
 
-  const canvasHandler = (canvas: HTMLCanvasElement) => {
-    canvas.removeEventListener('mousedown', canvasMousedown);
-    canvas.addEventListener('mousedown', canvasMousedown, false);
-  }
+
 
 
 
@@ -130,9 +167,12 @@ export default function OldQREditor(props: QRProps) {
 
       <div ref={ref} className="App" onClick={(e: React.MouseEvent) => {
         if (e.target instanceof HTMLCanvasElement) {
-          canvasHandler(e.target)
+          setShowTools(!showTools)
         }
-      }} />
+
+      }
+      } />
+
       <div style={styles.inputWrapper}>
 
         <FormControl className={classes.formControl}>
@@ -156,11 +196,91 @@ export default function OldQREditor(props: QRProps) {
           className={classes.button}
           startIcon={<ArrowDownwardIcon />}
         >
-          Download
+          {t("Download")}
         </Button>
 
       </div>
-    </div>
+
+      <Fade in={!showTools} timeout={1000}>
+        <Button
+          color="primary"
+          onClick={() => { setShowTools(!showTools) }}
+          className={classes.button}
+          startIcon={<EditIcon />}
+        >
+          {t("Edit")}
+        </Button>
+      </Fade>
+
+      <Fade in={showTools} timeout={1000}>
+        <div className="background">
+          <Button
+            color="primary"
+            onClick={() => { setShowTools(!showTools) }}
+            className={classes.button}
+            startIcon={<CloseIcon />
+            }
+          >
+            {t("Close")}
+          </Button>
+
+          <Grid container spacing={5}
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Grid item>
+              <div className="flex-container">
+                <Paper elevation={4}>
+                  <div className="Paper-header">
+                    <h3>{t("Color")}</h3>
+                  </div>
+                  <BlockPicker
+                    color={color}
+                    colors={['#000000', '#808080', '#FF0000',
+                      '#FFD800', '#4CFF00', '#00FFFF',
+                      '#0094FF', '#0026FF', '#FF7FED', '#007F0E']}
+                    onChange={(event) => setColor(event.hex)} triangle={'hide'} />
+                </Paper>
+
+              </div>
+            </Grid>
+            <Grid item>
+              <Paper elevation={4}>
+                <div className="Paper-header">
+                  <h3>{t("Corner Color")}</h3>
+                </div>
+                <div className="flex-container">
+                  <BlockPicker
+                    color={colorCorner}
+                    colors={['#000000', '#808080', '#FF0000',
+                      '#FFD800', '#4CFF00', '#00FFFF',
+                      '#0094FF', '#0026FF', '#FF7FED', '#007F0E']}
+                    onChange={(event) => setColorCorner(event.hex)} triangle={'hide'} />
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper elevation={4}>
+                <div className="Paper-header">
+                  <h3>{t("Icon")}</h3>
+                </div>
+                <div className="flex-container">
+                  <BlockPicker
+                    color={colorCorner}
+                    colors={['#000000', '#808080', '#FF0000',
+                      '#FFD800', '#4CFF00', '#00FFFF',
+                      '#0094FF', '#0026FF', '#FF7FED', '#007F0E']}
+                    onChange={(event) => setColorCorner(event.hex)} triangle={'hide'} />
+                </div>
+              </Paper>
+            </Grid>
+          </Grid>
+        </div >
+
+      </Fade >
+    </div >
+
   );
 }
 

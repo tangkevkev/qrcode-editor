@@ -3,6 +3,16 @@
     overflow: hidden;
 }
 
+.hover:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    color: red;
+}
+
+.background {
+    background-color: #fafafa;
+}
+
 .QR-Code {
     justify-content: center;
     align-items: center;

@@ -74,7 +74,7 @@ export default function OldSingleEditor() {
 
   return (
     <div className={`${classes.rootGrid}`}>
-      <Grid container spacing={2}
+      <Grid container spacing={3}
         direction="row"
         alignItems="center"
         justifyContent="center"
@@ -86,84 +86,15 @@ export default function OldSingleEditor() {
             imageSrc={imageSrc} 
             subTitle={subTitle} 
             colorCorner={colorCorner}
-            onClickQR={() => {console.log(showTools); setShowTools(!showTools)}}
+            
             />
         </Grid>
 
 
-        <Grid item>
-          <div className="flex-container">
-            <Paper elevation={4}>
-              <div className="Paper-header">
-                <h3>{t("Customize")}</h3>
-              </div>
-              <BlockPicker
-                color={color}
-                colors={['#000000', '#808080', '#FF0000',
-                  '#FFD800', '#4CFF00', '#00FFFF',
-                  '#0094FF', '#0026FF', '#FF7FED', '#007F0E']}
-                onChange={(event) => setColor(event.hex)} triangle={'hide'} />
-            </Paper>
-
-          </div>
-        </Grid>
+      
 
 
-        <Grid item>
-          <Paper elevation={4}>
-            <div className="Paper-header">
-              <h3>{t("Customize")}</h3>
-            </div>
-            <Accordion defaultExpanded={true}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography className={classes.heading}>{t("Color")}</Typography>
-                <Typography className={classes.secondaryHeading}>{"[" + t("Optional") + "]"}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-
-              </AccordionDetails>
-            </Accordion>
-            <Accordion defaultExpanded={false}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography className={classes.heading}>{t("Color Corner")}</Typography>
-                <Typography className={classes.secondaryHeading}>{"[" + t("Optional") + "]"}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <div className="flex-container">
-                  <BlockPicker
-                    color={colorCorner}
-                    colors={['#000000', '#808080', '#FF0000',
-                      '#FFD800', '#4CFF00', '#00FFFF',
-                      '#0094FF', '#0026FF', '#FF7FED', '#007F0E']}
-                    onChange={(event) => setColorCorner(event.hex)} triangle={'hide'} />
-                </div>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion defaultExpanded={false}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography className={classes.heading}>{t("Icon")}</Typography>
-                <Typography className={classes.secondaryHeading}>{"[" + t("Optional") + "]"}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <div className="flex-container">
-
-                </div>
-              </AccordionDetails>
-            </Accordion>
-          </Paper>
-        </Grid>
+        
       </Grid>
 
     </div >

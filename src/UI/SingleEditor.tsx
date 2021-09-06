@@ -60,6 +60,7 @@ export default function OldSingleEditor() {
   const [subTitle, setSubtitle] = useState("")
   const [color, setColor] = useState("#000000")
   const [colorCorner, setColorCorner] = useState("#000000")
+  const [showTools, setShowTools] = useState(false)
 
 
 
@@ -80,7 +81,13 @@ export default function OldSingleEditor() {
       >
 
         <Grid item xs={12}>
-          <QREditor content={content} color={color} imageSrc={imageSrc} subTitle={subTitle} colorCorner={colorCorner} />
+          <QREditor content={content}
+            color={color}
+            imageSrc={imageSrc} 
+            subTitle={subTitle} 
+            colorCorner={colorCorner}
+            onClickQR={() => {console.log(showTools); setShowTools(!showTools)}}
+            />
         </Grid>
 
 

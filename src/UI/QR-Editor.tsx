@@ -18,6 +18,7 @@ interface QRProps {
   colorCorner?: string,
   imageSrc?: string,
   subTitle?: string,
+  onClickQR?: Function,
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -107,29 +108,35 @@ export default function OldQREditor(props: QRProps) {
     qrCode.download({
       extension: fileExt as any
     });
+
   };
 
 
+  const canvasMousedown = () => {
+    if (props.onClickQR) {
+      props.onClickQR()
+    }
+  }
 
+  const canvasHandler = (canvas: HTMLCanvasElement) => {
+    canvas.removeEventListener('mousedown', canvasMousedown);
+    canvas.addEventListener('mousedown', canvasMousedown, false);
+  }
 
 
 
   return (
     <div className="QR-Code">
 
-      <div ref={ref} className="App" />
+      <div ref={ref} className="App" onClick={(e: React.MouseEvent) => {
+        if (e.target instanceof HTMLCanvasElement) {
+          canvasHandler(e.target)
+        }
+      }} />
       <div style={styles.inputWrapper}>
-      <Button
-          variant="contained"
-          color="default"
-          onClick={onDownloadClick}
-          className={classes.button}
-          startIcon={<ArrowDownwardIcon />}
-        >
-          Download
-        </Button>
+
         <FormControl className={classes.formControl}>
-          
+
           <InputLabel id="demo-simple-select-filled-label">Extension</InputLabel>
           <Select
             labelId="demo-simple-select-filled-label"
@@ -143,7 +150,14 @@ export default function OldQREditor(props: QRProps) {
           </Select>
 
         </FormControl>
-       
+        <Button
+          color="default"
+          onClick={onDownloadClick}
+          className={classes.button}
+          startIcon={<ArrowDownwardIcon />}
+        >
+          Download
+        </Button>
 
       </div>
     </div>

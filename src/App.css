@@ -1,6 +1,6 @@
 .No-Scroll {
     /* Hide scrollbars */
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .hover:hover {

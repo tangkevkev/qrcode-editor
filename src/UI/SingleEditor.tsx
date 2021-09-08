@@ -9,19 +9,22 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { useTranslation } from 'react-i18next';
 import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import ForwardIcon from '@material-ui/icons/Forward';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Fade from '@material-ui/core/Fade';
+import Grow from '@material-ui/core/Grow';
 
 const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
   box: {
     borderStyle: 'solid',
   },
   rootGrid: {
     flexGrow: 1,
-    margin: 50,
+    margin: 3,
   },
   paper: {
     padding: theme.spacing(2),
@@ -37,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: '2px 4px',
     display: 'flex',
-    width: 400,
+    width: 600,
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -50,10 +53,14 @@ const useStyles = makeStyles((theme) => ({
     height: 28,
     margin: 4,
   },
+  button: {
+    margin: theme.spacing(1),
+
+  },
 }));
 
 
-export default function OldSingleEditor() {
+export default function SingleEditor() {
 
   const classes = useStyles();
   const { t, } = useTranslation();
@@ -62,14 +69,18 @@ export default function OldSingleEditor() {
   const DEFAULT_USE_IMAGE = false
   const DEFAULT_CONTENT = ""
   const DEFAULT_COLOR = ""
+  const EXAMPLE_CONTENT = "www.qrcode-maker.io"
 
   const [imageSrc, setImageSrc] = useState("")
   const [useImage, setUseImage] = useState(false)
-  const [content, setContent] = useState("google.ch")
+  const [tempContent, setTempContent] = useState("")
+  const [content, setContent] = useState("")
   const [subTitle, setSubtitle] = useState("")
   const [color, setColor] = useState("#000000")
   const [colorCorner, setColorCorner] = useState("#000000")
-  const [showTools, setShowTools] = useState(false)
+  const [showQR, setShowQR] = useState(false)
+  const [open, setOpen] = useState(false);
+
 
 
 
@@ -84,37 +95,64 @@ export default function OldSingleEditor() {
   return (
     <div className={`${classes.rootGrid}`}>
       <Grid container spacing={3}
-        direction="row"
+        direction="column"
         alignItems="center"
         justifyContent="center"
       >
         <Paper component="form" className={classes.root}>
-          <IconButton className={classes.iconButton} aria-label="menu">
-            <MenuIcon />
-          </IconButton>
           <InputBase
             className={classes.input}
             placeholder="QR content"
-            value={content}
-            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {setContent(event.target.value)}}
+            value={tempContent}
+            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => { setTempContent(event.target.value) }}
             inputProps={{ 'aria-label': 'QR Code' }}
           />
-          <IconButton className={classes.iconButton} aria-label="search">
-            <ForwardIcon />
-          </IconButton>
-
         </Paper>
 
+        <div className="center button-group-margin">
 
-        <Grid item xs={12}>
-          <QREditor content={content}
-            color={color}
-            imageSrc={imageSrc}
-            subTitle={subTitle}
-            colorCorner={colorCorner}
+          <Button
+            variant="outlined"
+            color="default"
+            className={classes.button}
+            onClick={() => {
+              setContent(tempContent)
+              setShowQR(true)
+            }}
+          >
+            {t("Generate")}
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+            onClick={() => {
+              setTempContent(EXAMPLE_CONTENT);
+              setContent(EXAMPLE_CONTENT)
+              setShowQR(true)
+            }}
+          >
+            {t("Example")}
+          </Button>
+          <Backdrop className={classes.backdrop}
+            open={open}
+            onClick={() => { setOpen(false) }}
+            transitionDuration={800}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        </div>
+        {showQR &&
+          <Grid item xs={12}>
+            <QREditor content={content}
+              color={color}
+              imageSrc={imageSrc}
+              subTitle={subTitle}
+              colorCorner={colorCorner}
 
-          />
-        </Grid>
+            />
+
+          </Grid>
+        }
 
 
 

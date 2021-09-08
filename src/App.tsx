@@ -4,7 +4,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import SingleEditor from './UI/SingleEditor';
 import Profile from './UI/Profiles';
-
+import logo from './title_2.png';
+import  './App.css'
 
 
 const SINGLE_EDITOR_INDEX = 0
@@ -20,6 +21,9 @@ export default function App() {
 
   return (
     <div className="No-Scroll ">
+      <div className="App-header">
+        <img src={logo}  alt="logo" className="Title-image" />
+      </div>
       <SingleEditor />
     </div>
   );

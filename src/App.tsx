@@ -5,7 +5,8 @@ import Tab from '@material-ui/core/Tab';
 import SingleEditor from './UI/SingleEditor';
 import Profile from './UI/Profiles';
 import logo from './title_2.png';
-import  './App.css'
+import './App.css'
+import { Grid } from '@material-ui/core';
 
 
 const SINGLE_EDITOR_INDEX = 0
@@ -21,11 +22,21 @@ export default function App() {
 
   return (
     <div className="No-Scroll ">
-      <div className="App-header">
-        <img src={logo}  alt="logo" className="Title-image" />
-      </div>
-      <SingleEditor />
-    </div>
+      <Grid container spacing={3}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Grid item xs={12}>
+          <div className="App-header">
+            <img src={logo} alt="logo" className="Title-image" />
+          </div>
+        </Grid>
+        
+        <SingleEditor />
+
+      </Grid>
+    </div >
   );
 }
 /**

@@ -61,7 +61,8 @@ const useStyles = makeStyles((theme) => ({
     margin: 4,
   },
   button: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
+
 
   },
 }));
@@ -101,30 +102,31 @@ export default function SingleEditor() {
 
   return (
     <div className={`${classes.rootGrid}`}>
-      <Grid container spacing={3}
-        direction="column"
+
+      <Grid item xs={12}>
+        <Paper component="form" >
+          <TextField id="outlined-basic"
+            label={t("QR Content")}
+            variant="outlined"
+            className={classes.root}
+            value={tempContent}
+            maxRows={3}
+            onChange={
+              (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                setTempContent(event.target.value)
+              }}
+
+          />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12}
+        container
+        direction="row"
         alignItems="center"
         justifyContent="center"
       >
-        <Grid item xs={12}>
-          <Paper component="form" >
-            <TextField id="outlined-basic"
-              label={t("QR Content")}
-              variant="outlined"
-              className={classes.root}
-              value={tempContent}
-              maxRows={3}
-              onChange={
-                (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                  setTempContent(event.target.value)
-                }}
-
-            />
-          </Paper>
-        </Grid>
-
-        <div className="center button-group-margin">
-
+        <Grid item>
           <Button
             variant="outlined"
             color="default"
@@ -136,6 +138,8 @@ export default function SingleEditor() {
           >
             {t("Generate")}
           </Button>
+        </Grid>
+        <Grid item>
           <Button
             variant="outlined"
             color="primary"
@@ -148,32 +152,21 @@ export default function SingleEditor() {
           >
             {t("Example")}
           </Button>
-          <Backdrop className={classes.backdrop}
-            open={open}
-            onClick={() => { setOpen(false) }}
-            transitionDuration={800}>
-            <CircularProgress color="inherit" />
-          </Backdrop>
-        </div>
-        {showQR &&
-          <Grid item xs={12}>
-            <QREditor content={content}
-              color={color}
-              imageSrc={imageSrc}
-              subTitle={subTitle}
-              colorCorner={colorCorner}
-
-            />
-
-          </Grid>
-        }
-
-
-
-
-
-
+        </Grid>
       </Grid>
+      {showQR &&
+        <Grid item xs={12}>
+          <QREditor content={content}
+            color={color}
+            imageSrc={imageSrc}
+            subTitle={subTitle}
+            colorCorner={colorCorner}
+
+          />
+
+        </Grid>
+      }
+
 
     </div >
   );

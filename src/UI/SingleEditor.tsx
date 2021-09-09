@@ -40,7 +40,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: '2px 4px',
     display: 'flex',
+    maxWidth: 600,
+    minWidth: 300,
     width: 600,
+    [theme.breakpoints.between(0, 600)]: {
+      width: "100%"
+    }
+
+
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -99,15 +106,22 @@ export default function SingleEditor() {
         alignItems="center"
         justifyContent="center"
       >
-        <Paper component="form" className={classes.root}>
-          <InputBase
-            className={classes.input}
-            placeholder="QR content"
-            value={tempContent}
-            onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => { setTempContent(event.target.value) }}
-            inputProps={{ 'aria-label': 'QR Code' }}
-          />
-        </Paper>
+        <Grid item xs={12}>
+          <Paper component="form" >
+            <TextField id="outlined-basic"
+              label={t("QR Content")}
+              variant="outlined"
+              className={classes.root}
+              value={tempContent}
+              maxRows={3}
+              onChange={
+                (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                  setTempContent(event.target.value)
+                }}
+
+            />
+          </Paper>
+        </Grid>
 
         <div className="center button-group-margin">
 
@@ -164,4 +178,10 @@ export default function SingleEditor() {
     </div >
   );
 }
-
+  /** <InputBase
+className={classes.input}
+placeholder="QR content"
+value={tempContent}
+onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => { setTempContent(event.target.value) }}
+inputProps={{ 'aria-label': 'QR Code' }}
+/> */

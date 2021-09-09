@@ -114,6 +114,7 @@ export default function SingleEditor() {
             onChange={
               (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
                 setTempContent(event.target.value)
+                setContent(event.target.value)
               }}
 
           />

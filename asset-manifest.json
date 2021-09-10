@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/qrcode-editor/static/css/main.2bdcda5a.chunk.css",
-    "main.js": "/qrcode-editor/static/js/main.4f8ecfac.chunk.js",
-    "main.js.map": "/qrcode-editor/static/js/main.4f8ecfac.chunk.js.map",
+    "main.js": "/qrcode-editor/static/js/main.c30c8b7e.chunk.js",
+    "main.js.map": "/qrcode-editor/static/js/main.c30c8b7e.chunk.js.map",
     "runtime-main.js": "/qrcode-editor/static/js/runtime-main.4f0c21a8.js",
     "runtime-main.js.map": "/qrcode-editor/static/js/runtime-main.4f0c21a8.js.map",
     "static/js/2.c6337ca9.chunk.js": "/qrcode-editor/static/js/2.c6337ca9.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.4f0c21a8.js",
     "static/js/2.c6337ca9.chunk.js",
     "static/css/main.2bdcda5a.chunk.css",
-    "static/js/main.4f8ecfac.chunk.js"
+    "static/js/main.c30c8b7e.chunk.js"
   ]
 }

@@ -13,6 +13,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Fade from '@material-ui/core/Fade';
 import Grow from '@material-ui/core/Grow';
+import { kMaxLength } from 'buffer';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -78,6 +79,7 @@ export default function SingleEditor() {
   const DEFAULT_CONTENT = ""
   const DEFAULT_COLOR = ""
   const EXAMPLE_CONTENT = "www.qrcode-maker.io"
+  const CONTENT_MAX_LENGTH = 600
 
   const [imageSrc, setImageSrc] = useState("")
   const [useImage, setUseImage] = useState(false)
@@ -111,6 +113,7 @@ export default function SingleEditor() {
             className={classes.root}
             value={tempContent}
             maxRows={3}
+            inputProps={{ maxLength: CONTENT_MAX_LENGTH }}
             onChange={
               (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
                 setTempContent(event.target.value)

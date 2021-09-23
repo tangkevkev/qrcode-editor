@@ -1,20 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling, { cornerDotTypes, cornerSquareTypes } from "qr-code-styling";
-import InputLabel from '@material-ui/core/InputLabel';
+import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Button from "@material-ui/core/Button";
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import Button from '@mui/material/Button';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import { useTranslation } from 'react-i18next';
 import { BlockPicker } from 'react-color'
-import Fade from '@material-ui/core/Fade';
-import EditIcon from '@material-ui/icons/Edit';
-import CloseIcon from '@material-ui/icons/Close';
+import Fade from '@mui/material/Fade';
+import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 
@@ -179,7 +179,7 @@ export default function OldQREditor(props: QRProps) {
 
         </FormControl>
         <Button
-          color="default"
+          color="primary"
           onClick={onDownloadClick}
           className={classes.button}
           startIcon={<ArrowDownwardIcon />}
